@@ -1,0 +1,6 @@
+#written by FileProperties
+#2018-15-20
+#Thu Dec 20 19:15:45 CST 2018
+day=30
+year=2018
+month=12
