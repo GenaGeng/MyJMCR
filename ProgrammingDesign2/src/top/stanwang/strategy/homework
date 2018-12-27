@@ -1,0 +1,2 @@
+//10-2 因为Hand类是单例模式，总共只有三个实例分别对应拳头、剪刀、布，去通过getHand来获取这三个实例，所以不管是哪一种Strategy出拳，只要出拳的内容一样，都是引用了相同的对象。
+//10-3 在Java 中，类中没有被初始化的字段会被自动初始化，primitive types 会初始化为0(boolean -> false), 而reference type 会被初始化为null

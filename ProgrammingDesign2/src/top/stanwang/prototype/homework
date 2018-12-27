@@ -1,0 +1,2 @@
+6-1 将Product接口改为抽象类，在Product类中给出createClone方法的具体实现
+6-2 没有实现Cloneable接口。不然哪个类调用clone方法都不会抛异常。

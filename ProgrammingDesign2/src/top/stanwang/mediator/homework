@@ -1,0 +1,3 @@
+//对LoginFrame类中的userpassChanged方法进行如下修改
+//if（textPass.getText().length() >= 4 && textUser.getText().length() >= 4)
+//16-2 不能实现

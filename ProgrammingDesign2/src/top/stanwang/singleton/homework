@@ -1,0 +1,1 @@
+5-3 当在多个线程同时调用getInstance方法时，可能会船舰多个Singleton实例。

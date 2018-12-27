@@ -1,0 +1,9 @@
+	3-1:
+        InputStream的read()方法。read()方法会被 模板方法 read(bytes[] b,int off, int len) 循环调用。
+    3-2:
+    	不允许子类重载该方法
+    3-3:
+  		把这三个方法的修饰符改成默认
+  	3-4:
+  		我们需要在类中实现某些方法，例如函数display。接口不能有实现方法，而抽象类可以。在TemplateMethod模式中，无法用接口替代类。
+
