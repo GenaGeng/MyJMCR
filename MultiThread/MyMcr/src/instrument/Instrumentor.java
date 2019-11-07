@@ -1,15 +1,13 @@
 package instrument;
 
 import jdk.internal.org.objectweb.asm.ClassReader;
+import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.ClassWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.instrument.ClassFileTransformer;
-import java.lang.instrument.IllegalClassFormatException;
 import java.lang.instrument.Instrumentation;
-import java.security.ProtectionDomain;
 
 public class Instrumentor {
 
@@ -20,7 +18,7 @@ public class Instrumentor {
            if (className.contains("test/Simple")){
                ClassReader classReader = new ClassReader(classfileBuffer);
                ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_FRAMES);
-               MyClassTransformer myClassTransformer = new MyClassTransformer(classWriter);
+               ClassVisitor myClassTransformer = new MyClassTransformer(classWriter);
                classReader.accept(myClassTransformer,ClassReader.EXPAND_FRAMES);
                classfileBuffer = classWriter.toByteArray();
                File dir = new File("out");
