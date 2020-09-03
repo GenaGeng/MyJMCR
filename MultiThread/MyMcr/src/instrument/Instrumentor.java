@@ -15,7 +15,7 @@ public class Instrumentor {
 
     public static void premain(String agentArgs, Instrumentation inst) {
         inst.addTransformer((loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> {
-           if (className.contains("test/Simple")){
+           if (className.contains("test")){
                ClassReader classReader = new ClassReader(classfileBuffer);
                ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_FRAMES);
                ClassVisitor myClassTransformer = new MyClassTransformer(classWriter);

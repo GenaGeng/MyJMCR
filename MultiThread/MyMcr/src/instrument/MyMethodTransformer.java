@@ -36,20 +36,25 @@ public class MyMethodTransformer extends AdviceAdapter implements Opcodes {
             return;
         }
         boolean isRead = false;
-        if (opcode == Opcodes.GETFIELD || opcode == Opcodes.GETSTATIC) {
-            isRead = true;
-            instrumentField(true,isRead,owner,name,desc);
-            super.visitFieldInsn(opcode, owner, name, desc);
-        } else {
-            max_index_cur++;
-            int index = max_index_cur;
-            storeValue(desc,index);//栈顶值存入局部变量表
-            loadValue(desc,index);//-
-            instrumentField(true,isRead,owner,name,desc);
-            super.visitFieldInsn(opcode, owner, name, desc);
+//        if (name.equals("x")) {
+            if (opcode == Opcodes.GETFIELD || opcode == Opcodes.GETSTATIC) {
+                isRead = true;
+                instrumentField(true, isRead, owner, name, desc);
+                super.visitFieldInsn(opcode, owner, name, desc);
+            } else {
+                max_index_cur++;
+                int index = max_index_cur;
+                storeValue(desc, index);
+                loadValue(desc, index);
+                instrumentField(false, isRead, owner, name, desc);
+                super.visitFieldInsn(opcode, owner, name, desc);
+            }
         }
+//        else {
+//            super.visitFieldInsn(opcode, owner,name, desc);
+//        }
 //        instrumentField(false,isRead,owner,name,desc);
-    }
+//    }
 
     private void loadValue(String desc, int index) {
         if (desc.startsWith("L") || desc.startsWith("[")) {
@@ -104,10 +109,10 @@ public class MyMethodTransformer extends AdviceAdapter implements Opcodes {
         if (isBefore) {
             mv.visitMethodInsn(Opcodes.INVOKESTATIC,
                     Instrumentor.EVENT_RECIEVER,
-                    "beforeFieldAccess",
+                    "beforeFieldRead",
                     BOOL_3STRINGS_INT_VOID);
         } else {
-            mv.visitMethodInsn(Opcodes.INVOKESTATIC, Instrumentor.EVENT_RECIEVER, "afterFieldAccess", BOOL_3STRINGS_INT_VOID,false);
+            mv.visitMethodInsn(Opcodes.INVOKESTATIC, Instrumentor.EVENT_RECIEVER, "beforeFieldWrite", BOOL_3STRINGS_INT_VOID,false);
         }
     }
 

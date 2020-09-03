@@ -24,6 +24,7 @@ public class MyClassTransformer extends ClassVisitor {
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+//        System.out.println("访问方法"+ name);
         MethodVisitor mv =  super.visitMethod(access, name, desc, signature, exceptions);
         mv = new MyMethodTransformer( mv, access, name, desc);
         return mv;
